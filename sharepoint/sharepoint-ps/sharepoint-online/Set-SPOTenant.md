@@ -110,8 +110,8 @@ Set-SPOTenant [-ApplyAppEnforcedRestrictionsToAdHocRecipients <Boolean>]
  [-ViewInFileExplorerEnabled <Boolean>]
  [-AllowGuestUserShareToUsersNotInSiteCollection <Boolean>]
  [-DisableCustomAppAuthentication <Boolean>]
- [-ShowOpenInDesktopOptionForSyncedFiles <Boolean>]
- [-OneDriveLoopSharingCapability <SharingCapabilities>]
+ [-ReduceTempTokenLifetimeEnabled <Boolean>]
+ [-ReduceTempTokenLifetimeValue <Int32>]
  [<CommonParameters>]
 ```
 
@@ -203,7 +203,7 @@ This example enables tenant admins to enable ODB and SPO to respect Exchange sup
 Set-SPOTenant -ShowPeoplePickerSuggestionsForGuestUsers $true
 ```
 
-This example enables the option to search for existing guest users at Tenant Level.
+This example enable the option to search for existing guest users at Tenant Level.
 
 ## PARAMETERS
 
@@ -2014,58 +2014,47 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ShowOpenInDesktopOptionForSyncedFiles
+### CommonParameters
 
-The ShowOpenInDesktopOptionForSyncedFiles setting (set to false by default) displays the "Open in desktop" option when users go to SharePoint or OneDrive on the web and open the shortcut menu for a file that they're syncing with the OneDrive sync app.
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 
-The valid values are:
+For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-- False (default) – "Open in desktop" is disabled and not shown on the shortcut menu.
-- True – "Open in desktop" is enabled and the option to open synced files locally appears on the shortcut menu.
+### -ReduceTempTokenLifetimeEnabled 
+Enables reduced session timeout for temporary URLs used by apps for document download scenarios. Reduction occurs when app’s redeeming IP address does not match the original requesting IP. Default value is 15 minutes if ReduceTempTokenLifetimeValue is not set.
+
+> [!NOTE]
+> Reducing this value may bring degradation in end user experience by requiring frequent authentication prompts to users. 
+
+PARAMVALUE: $true | $false
 
 ```yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
+Applicable: SharePoint Online
 Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### -OneDriveLoopSharingCapability
-
-When sharing a whiteboard in a Teams meeting, Whiteboard creates a sharing link that’s accessible by anyone within the organization and automatically shares the whiteboard with any in-tenant users in the meeting.
-
-There’s an additional capability for temporary collaboration by external and shared device accounts during a meeting. This allows these users to temporarily view and collaborate on whiteboards when they’re shared in a Teams meeting, similar to PowerPoint Live sharing.
-
-If you have the external sharing for ODB allowed, no further action is required. If you have external sharing disabled, you can leave it disabled but you must enable this new setting. For more information, see [Enable Microsoft Whiteboard for your organization](https://support.microsoft.com/office/enable-microsoft-whiteboard-for-your-organization-1caaa2e2-5c18-4bdf-b878-2d98f1da4b24).
-
-The valid values are:  
-
-- Disabled
-- ExternalUserSharingOnly
-- ExternalUserAndGuestSharing
-- ExistingExternalUserSharingOnly
+### -ReduceTempTokenLifetimeValue
+Optional parameter to set the session timeout value for temporary URLs. The value can be between 5-15 minutes and the default value is 15 minutes.
+ 
+PARAMVALUE: Int32
 
 ```yaml
-Type: SharingCapabilities
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 Applicable: SharePoint Online
 Required: False
 Position: Named
-Default value: None
+Default value: 15
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-
-For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## RELATED LINKS
 
